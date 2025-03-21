@@ -24,7 +24,10 @@ async function signup(req, res) {
 
 /**
  * POST : /signin
+ * req-header {'x-access-token: JWT_TOKEN}
  * req-body {email: 'user@email.com', password: '1234'}
+ *
+ * sets req.user = userID
  */
 
 async function signin(req, res) {
