@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
 
+    // This is sequelize hook, trigger just before creating a user
     User.beforeCreate(function encrypt(user) {
         const encryptedPassword = bcrypt.hashSync(
             user.password,
