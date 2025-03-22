@@ -45,7 +45,29 @@ async function signin(req, res) {
     }
 }
 
+/**
+ * POST : /role
+ * req-header {'x-access-token: JWT_TOKEN}
+ * req-body {email: 'user@email.com', role: 'admin'}
+ */
+
+async function addRoleToUser(req, res) {
+    try {
+        const user = await UserService.addRoletoUser({
+            role: req.body.role,
+            id: req.body.id,
+        });
+        SuccessResponse.data = user;
+        return res.status(StatusCodes.CREATED).json(SuccessResponse);
+    } catch (error) {
+        console.log(error);
+        ErrorResponse.error = error;
+        return res.status(error.statusCode).json(ErrorResponse);
+    }
+}
+
 module.exports = {
     signup,
     signin,
+    addRoleToUser,
 };
