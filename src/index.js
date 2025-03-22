@@ -17,7 +17,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(limiter);
 
 // Creating Proxy
-console.log("FLIGHT_SERVICE Address:", ServerConfig.FLIGHT_SERVICE);
 app.use(
     "/flightsService",
     createProxyMiddleware({
