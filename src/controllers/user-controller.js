@@ -66,8 +66,46 @@ async function addRoleToUser(req, res) {
   }
 }
 
+/**
+ * POST : /addAdminRole
+ * req-header {'x-access-token: JWT_TOKEN}
+ * req-body {id: 14}
+ */
+
+async function addAdminRoleToUser(req, res) {
+  try {
+    const user = await UserService.addAdminRoleToUser(req.body.id);
+    SuccessResponse.data = user;
+    return res.status(StatusCodes.CREATED).json(SuccessResponse);
+  } catch (error) {
+    console.log(error);
+    ErrorResponse.error = error;
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
+/**
+ * POST : /addFlightCompanyRole
+ * req-header {'x-access-token: JWT_TOKEN}
+ * req-body {id: 14}
+ */
+
+async function addFlightCompanyRoleToUser(req, res) {
+  try {
+    const user = await UserService.addFlightCompanyRoleToUser(req.body.id);
+    SuccessResponse.data = user;
+    return res.status(StatusCodes.CREATED).json(SuccessResponse);
+  } catch (error) {
+    console.log(error);
+    ErrorResponse.error = error;
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
 module.exports = {
   signup,
   signin,
   addRoleToUser,
+  addFlightCompanyRoleToUser,
+  addAdminRoleToUser,
 };
